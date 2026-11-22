@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Ram Leela</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../icon.png">
+<style>
+  :root { color-scheme: light; --bg: #fffaf1; --ink: #3a273a; --muted: #55495b; --line: #d2c6ac; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--ink); font: 18px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 420px; padding: 24px 16px; text-align: center; }
+  .icon { width: 96px; height: 96px; border-radius: 22px; image-rendering: pixelated; box-shadow: 0 2px 0 var(--line); }
+  h1 { margin: 12px 0 4px; font: 700 34px/1.1 Georgia, serif; }
+  p { color: var(--muted); margin: 0 0 22px; }
+  .store { display: block; margin: 12px auto; width: fit-content; }
+  .store img { display: block; height: 54px; width: auto; }
+  a { color: #67295b; }
+</style>
+</head>
+<body>
+<main>
+  <img class="icon" src="../icon.png" alt="">
+  <h1>Ram Leela</h1>
+  <p id="msg">A playable Ramayana adventure for iPhone and iPad. Chapter 1 is free.</p>
+  <a class="store" id="ios" href="https://apps.apple.com/app/id6837727833"><img src="../app-store.svg" alt="Download on the App Store" width="162" height="54"></a>
+  <p style="margin-top:22px"><a href="../">Help and support</a></p>
+</main>
+<script>
+  // ?ct=campaign-name (e.g. from an ad) is passed on to Apple's App Analytics campaign tracking.
+  var ct = (new URLSearchParams(location.search).get('ct') || '').replace(/[^\w-]/g, '').slice(0, 40);
+  var ios = document.getElementById('ios');
+  if (ct) ios.href = 'https://apps.apple.com/app/apple-store/id6837727833?pt=431076&ct=' + ct + '&mt=8';
+  var ua = navigator.userAgent;
+  var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (isIOS) {
+    location.replace(ios.href);
+  } else if (/Android/i.test(ua)) {
+    document.getElementById('msg').textContent = 'Ram Leela is on iPhone and iPad for now.';
+  }
+</script>
+</body>
+</html>
