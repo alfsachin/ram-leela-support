@@ -23,8 +23,9 @@
 <main>
   <img class="icon" src="../icon.png" alt="">
   <h1>Ram Leela</h1>
-  <p id="msg">A playable Ramayana adventure for iPhone and iPad. Chapter 1 is free.</p>
+  <p id="msg">Try it free.</p>
   <a class="store" id="ios" href="https://apps.apple.com/app/id6837727833"><img src="../app-store.svg" alt="Download on the App Store" width="162" height="54"></a>
+  <p id="tip" hidden>Tap the button above. If nothing happens, tap <b>&middot;&middot;&middot;</b> at the top right and choose <b>Open in external browser</b>.</p>
   <p style="margin-top:22px"><a href="../">Help and support</a></p>
 </main>
 <script>
@@ -34,7 +35,13 @@
   if (ct) ios.href = 'https://apps.apple.com/app/apple-store/id6837727833?pt=431076&ct=' + ct + '&mt=8';
   var ua = navigator.userAgent;
   var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  if (isIOS) {
+  // Instagram's and Facebook's own browsers stall on an App Store jump nobody tapped:
+  // there, show the button and a tip instead; a real tap opens the App Store.
+  var inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS/.test(ua);
+  if (isIOS && inApp) {
+    document.getElementById('tip').hidden = false;
+    document.querySelector('.store img').style.height = '72px';
+  } else if (isIOS) {
     location.replace(ios.href);
   } else if (/Android/i.test(ua)) {
     document.getElementById('msg').textContent = 'Ram Leela is on iPhone and iPad for now.';
